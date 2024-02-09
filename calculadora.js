@@ -7,6 +7,23 @@ let novoNumero = true
 let operador
 let numeroAnterior
 
+const operacaoPendente = () => operador != undefined
+
+const calcular = () => {
+    if (operacaoPendente()) {
+        novoNumero = true
+        const numeroAtual = parseFloat(display.textContent)
+        if (operador == "+"){
+        atualizarDisplay(numeroAnterior + numeroAtual)}
+    } else if (operador == "-") {
+        atualizarDisplay(numeroAnterior - numeroAtual)
+    } else if (operador == "*") {
+        atualizarDisplay(numeroAnterior * numeroAtual)
+    } else if (operador == "/") {
+        atualizarDisplay(numeroAnterior / numeroAtual)
+    }
+}
+
 const atualizarDisplay = (texto) => {
     if (novoNumero) {
         display.textContent = texto
@@ -19,7 +36,13 @@ const atualizarDisplay = (texto) => {
 const inserirNumero = (evento) => atualizarDisplay(evento.target.textContent)
 numeros.forEach(numero => numero.addEventListener('click', inserirNumero))
 
-const selecionarOperador = () => {
-    novoNumero = true
+const selecionarOperador = (evento) => {
+    if (!novoNumero) {
+        calcular()
+        novoNumero = true
+        operador = evento.target.textContent
+        numeroAnterior = parseFloat(display.textContent)
+        console.log(operador)
+    }
 }
 operadores.forEach(operador => operador.addEventListener('click', selecionarOperador))
