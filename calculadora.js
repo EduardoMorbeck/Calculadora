@@ -11,17 +11,14 @@ const operacaoPendente = () => operador != undefined
 
 const calcular = () => {
     if (operacaoPendente()) {
-        novoNumero = true
         const numeroAtual = parseFloat(display.textContent)
-        if (operador == "+"){
-        atualizarDisplay(numeroAnterior + numeroAtual)}
-    } else if (operador == "-") {
-        atualizarDisplay(numeroAnterior - numeroAtual)
-    } else if (operador == "*") {
-        atualizarDisplay(numeroAnterior * numeroAtual)
-    } else if (operador == "/") {
-        atualizarDisplay(numeroAnterior / numeroAtual)
-    }
+        novoNumero = true
+        if (operador == '+'){
+            atualizarDisplay(numeroAnterior + numeroAtual)
+        }else if (operador == '-'){
+            atualizarDisplay(numeroAnterior - numeroAtual)}
+        }
+        
 }
 
 const atualizarDisplay = (texto) => {
@@ -42,7 +39,6 @@ const selecionarOperador = (evento) => {
         novoNumero = true
         operador = evento.target.textContent
         numeroAnterior = parseFloat(display.textContent)
-        console.log(operador)
     }
 }
 operadores.forEach(operador => operador.addEventListener('click', selecionarOperador))
